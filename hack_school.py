@@ -5,9 +5,9 @@ from datacenter.models import (Chastisement, Commendation, Lesson, Mark, Schoolk
 def name_check():
     child = input("Введите ФИО ученика: ")
     try:
-        child_names = Schoolkid.objects.get(full_name__contains=child)
-        print(child_names)
-        return child_names
+        child_name = Schoolkid.objects.get(full_name__contains=child)
+        print(child_name)
+        return child_name
     except Schoolkid.DoesNotExist:
         print("Такого ученика нет")
     except Schoolkid.MultipleObjectsReturned:
@@ -15,8 +15,8 @@ def name_check():
 
 
 def fix_marks():
-    bed_points = Mark.objects.filter(schoolkid=name_check(), points__in=[2, 3])
-    for bed_point in bed_points:
+    bad_points = Mark.objects.filter(schoolkid=name_check(), points__in=[2, 3])
+    for bed_point in bad_points:
         bed_point.points = 5
         bed_point.save()
 
