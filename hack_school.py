@@ -27,5 +27,5 @@ def create_commendation():
     schoolkid = name_check()
     comments=['Молодец!', 'Отлично!', 'превосходно', 'великолепно', 'блестяще', 'мастерски', 'добросовестно']
     target_lesson = input("Введите предмет: ")
-    hack_lesson = Lesson.objects.filter(year_of_study=schoolkid.year_of_study, group_letter=schoolkid.group_letter[0], subject__title=target_lesson).order_by('?')
+    hack_lesson = Lesson.objects.filter(year_of_study=schoolkid.year_of_study, group_letter=schoolkid.group_letter, subject__title=target_lesson).order_by('?').first()
     Commendation.objects.create(text=random.choice(comments), created=hack_lesson.date, schoolkid=schoolkid, subject =hack_lesson.subject, teacher=hack_lesson.teacher)
